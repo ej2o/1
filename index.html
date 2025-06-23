@@ -4,24 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ميركاتو | تسوق بذكاء، عش أفضل</title>
-  <!-- favicon -->
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
 
-  <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
   new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
   j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
   })(window,document,'script','dataLayer','GTM-KPJ7ZG4R');</script>
-  <!-- End Google Tag Manager -->
-
-  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Google Fonts for Cairo -->
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;800;900&display=swap" rel="stylesheet" />
 
-  <!-- Firebase SDKs -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getAuth, onAuthStateChanged, signInWithCustomToken, signInAnonymously, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
@@ -342,20 +335,15 @@
 </head>
 <body class="font-cairo antialiased overflow-x-hidden">
 
-  <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KPJ7ZG4R"
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
-
   <div id="root" class="flex-grow flex flex-col">
-    <!-- شاشة التحميل الأولية (تختفي عندما يتم تحميل التطبيق) -->
     <div id="initial-loading" class="flex flex-col items-center justify-center min-h-screen">
         <div class="loading-spinner"></div>
         <p class="text-xl text-gray-300 mt-2">جاري التحميل...</p>
     </div>
   </div>
 
-  <!-- مكتبات React الأساسية -->
   <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -366,86 +354,13 @@
     const useCallback = React.useCallback;
 
     // A placeholder for products data (real data would come from Firestore)
-    const PRODUCTS_DATA = [
-      {
-        id: 'p1',
-        name: 'مجموعة العناية بالبشرة الفاخرة',
-        price: '350.00 ر.س',
-        imageUrl: 'https://placehold.co/150x150/1F2E40/D4AF37?text=SkinCare',
-        description: 'مجموعة متكاملة لتغذية وترطيب البشرة، لبشرة نضرة ومشرقة.',
-        category: 'عناية بالبشرة',
-        country: 'SA',
-      },
-      {
-        id: 'p2',
-        name: 'سماعات أذن لاسلكية عالية الجودة',
-        price: '299.99 ر.س',
-        imageUrl: 'https://placehold.co/150x150/1F2E40/D4AF37?text=Electronics',
-        description: 'صوت نقي، راحة تدوم طويلاً، مثالية لجميع الأنشطة.',
-        category: 'إلكترونيات',
-        country: 'AE',
-      },
-      {
-        id: 'p3',
-        name: 'طقم ملابس رجالية كاجوال',
-        price: '450.00 ر.س',
-        imageUrl: 'https://placehold.co/150x150/1F2E40/D4AF37?text=Fashion',
-        description: 'تصميم عصري ومريح للاستخدام اليومي، متوفر بمقاسات وألوان مختلفة.',
-        category: 'أزياء وملابس',
-        country: 'EG',
-      },
-      {
-        id: 'p4',
-        name: 'منظم تخزين للسيارة',
-        price: '80.00 ر.س',
-        imageUrl: 'https://placehold.co/150x150/1F2E40/D4AF37?text=Car+Accs',
-        description: 'حافظ على سيارتك منظمة مع هذا المنظم العملي والمتين.',
-        category: 'إكسسوارات السيارات',
-        country: 'KW',
-      },
-      {
-        id: 'p5',
-        name: 'مكنسة كهربائية روبوتية ذكية',
-        price: '900.00 ر.س',
-        imageUrl: 'https://placehold.co/150x150/1F2E40/D4AF37?text=Home+Tools',
-        description: 'لتنظيف منزلك بكفاءة عالية دون عناء، مع إمكانية التحكم عبر التطبيق.',
-        category: 'مستلزمات منزلية',
-        country: 'SA',
-      },
-      {
-        id: 'p6',
-        name: 'أوزان دامبلز قابلة للتعديل',
-        price: '320.00 ر.س',
-        imageUrl: 'https://placehold.co/150x150/1F2E40/D4AF37?text=Sports',
-        description: 'مثالية للتمارين المنزلية، توفر مجموعة متنوعة من الأوزان في جهاز واحد.',
-        category: 'مستلزمات رياضية',
-        country: 'AE',
-      },
-      {
-        id: 'p7',
-        name: 'شاحن محمول سريع (باور بانك)',
-        price: '150.00 ر.س',
-        imageUrl: 'https://placehold.co/150x150/1F2E40/D4AF37?text=Electronics',
-        description: 'اشحن أجهزتك بسرعة فائقة أثناء التنقل، سعة كبيرة.',
-        category: 'إلكترونيات',
-        country: 'SA',
-      },
-      {
-        id: 'p8',
-        name: 'كريم مرطب للوجه مع واقي شمسي',
-        price: '110.00 ر.س',
-        imageUrl: 'https://placehold.co/150x150/1F2E40/D4AF37?text=SkinCare',
-        description: 'يحمي ويرطب البشرة، مثالي للاستخدام اليومي.',
-        category: 'عناية بالبشرة',
-        country: 'AE',
-      },
-    ];
+    const PRODUCTS_DATA = []; // تم حذف المنتجات الثابتة
 
     const CATEGORIES_DATA = [
-      { name: 'أزياء وملابس', imageUrl: 'https://placehold.co/80x80/1A2C42/D4AF37?text=أزياء', link: 'clothes.html' },
-      { name: 'إلكترونيات', imageUrl: 'https://placehold.co/80x80/1A2C42/D4AF37?text=إلكترونيات', link: 'electronics.html' },
-      { name: 'عناية بالبشرة', imageUrl: 'https://placehold.co/80x80/1A2C42/D4AF37?text=بشرة', link: 'skincare.html' },
-      { name: 'إكسسوارات السيارات', imageUrl: 'https://placehold.co/80x80/1A2C42/D4AF37?text=سيارات', link: 'car-accessories.html' },
+      { name: 'أزياء وملابس', imageUrl: 'image.png', link: 'clothes.html' },
+      { name: 'إلكترونيات', imageUrl: 'image.png', link: 'electronics.html' },
+      { name: 'عناية بالبشرة', imageUrl: 'image.png', link: 'skincare.html' },
+      { name: 'إكسسوارات السيارات', imageUrl: 'image.png', link: 'car-accessories.html' },
       { name: 'مستلزمات منزلية', imageUrl: 'https://placehold.co/80x80/1A2C42/D4AF37?text=منزلية', link: 'home-supplies.html' },
       { name: 'مستلزمات رياضية', imageUrl: 'https://placehold.co/80x80/1A2C42/D4AF37?text=رياضية', link: 'sports-supplies.html' },
     ];
@@ -483,12 +398,9 @@
         setIsLoggedIn(!!currentUser);
       }, [currentUser]);
 
-      // Removed handleGoBack as the button is removed.
-
       return (
         <header className="header-bg text-white p-1.5 shadow-sm rounded-b-md relative z-50">
           <div className="container mx-auto flex flex-wrap items-center justify-between py-1">
-            {/* زر الرجوع (أقصى اليمين/بداية) - تم حذفه */}
             {/* الشعار والعنوان (يمين) */}
             <div className="flex items-center space-x-1.5 space-x-reverse">
               <img
@@ -512,7 +424,6 @@
 
             {/* قائمة التنقل الرئيسية (المنتصف) */}
             <nav className="flex items-center space-x-2 space-x-reverse text-xs font-semibold flex-grow justify-center">
-              {/* زر الرئيسية - تم حذفه */}
               <a href="all-categories.html" className="hover:text-[#D4AF37] transition-colors p-0.5 rounded-xs hover:bg-white hover:bg-opacity-10">
                 أقسامنا
               </a>
@@ -617,7 +528,6 @@
             <div className="animate-fade-in-up animation-delay-200">
               <h3 className="text-base font-bold mb-1.5 text-[#D4AF37]">روابط سريعة</h3>
               <ul className="space-y-0.75">
-                {/* رابط الرئيسية - تم حذفه */}
                 <li>
                   <a href="all-categories.html" className="text-gray-400 hover:text-white transition-colors text-xs">
                     أقسامنا
@@ -652,7 +562,7 @@
                   className="text-gray-400 hover:text-[#D4AF37] transition-colors transform hover:scale-110 duration-300"
                   aria-label="TikTok"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="0" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-tiktok"><path d="M9 12v6H5v-6H2l-2 8c0 2 2 2 2 2h6s2 0 2-2V9a2 2 0 0 0-2-2H9v5zm8 0h3l1 7c0 2-2 2-2 2h-6s-2 0-2-2v-4a2 0 0 0 2-2h3V2h4v10z"/></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="0" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-tiktok"><path d="M9 12v6H5v-6H2l-2 8c0 2 2 2 2 2h6s2 0 2-2V9a2 0 0 0-2-2H9v5zm8 0h3l1 7c0 2-2 2-2 2h-6s-2 0-2-2v-4a2 0 0 0 2-2h3V2h4v10z"/></svg>
                 </a>
                 <a
                   href="https://www.instagram.com/mercato.0?igsh=MWRvangxbHdqcXA0bQ=="
@@ -670,7 +580,7 @@
                   className="text-gray-400 hover:text-[#D4AF37] transition-colors transform hover:scale-110 duration-300"
                   aria-label="Telegram"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M18.36 5.66c-.45-.24-1.07-.1-.99.55l-.54 3.25c-.07.4-.4.68-.8.68h-.02a.75.75 0 0 1-.74-.85l.77-5.07c.05-.33-.1-.66-.43-.76l-14-4.83c-.45-.15-.9.13-1.01.58-.23 1.07.72 6.57 1.13 8.84.14.77.7 1.34 1.48 1.54l3.59 1.05a2 0 0 0 1.52-.34l5.31-4.13c.3-.24.74-.29 1.09-.13.38.17.6.58.5.99l-2.07 4.97c-.24.56-.05 1.2.45 1.56l.01.01c.5.37 1.25.32 1.68-.13l3.22-3.23c.3-.3.47-.7.47-1.13V6.21c0-.49-.2-.9-.59-1.25z"/></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M18.36 5.66c-.45-.24-1.07-.1-.99.55l-.54 3.25c-.07.4-.4.68-.8.68h-.02a.75.75 0 0 1-.74-.85l.77-5.07c.05-.33-.1-.66-.43-.76l-14-4.83c-.45-.15-.9.13-1.01.58-.23 1.07.72 6.57 1.13 8.84.14.77.7 1.34 1.48 1.54l3.59 1.05a2 2 0 0 0 1.52-.34l5.31-4.13c.3-.24.74-.29 1.09-.13.38.17.6.58.5.99l-2.07 4.97c-.24.56-.05 1.2.45 1.56l.01.01c.5.37 1.25.32 1.68-.13l3.22-3.23c.3-.3.47-.7.47-1.13V6.21c0-.49-.2-.9-.59-1.25z"/></svg>
                 </a>
               </div>
             </div>
@@ -727,8 +637,6 @@
         setDisplayedProducts(PRODUCTS_DATA);
       }, []); // No dependencies for now, runs once
 
-      // Removed handleSearchChange as the search bar is removed.
-
       const handleAddToCart = async (productToAdd) => {
         if (!currentUser || !currentUser.uid) {
           setModal({ message: 'الرجاء تسجيل الدخول لإضافة منتجات إلى السلة.', type: 'error', onClose: () => setModal(null) });
@@ -783,15 +691,13 @@
           <Header currentUser={currentUser} cartItemCount={cartItemCount} />
 
           <main className="container mx-auto my-6 px-2.5 relative z-30 flex-grow">
-            {/* Search Bar - تم حذفه */}
-
             {/* Hero Section / Banner */}
             <section className="mb-8 p-4 promo-banner text-center text-white">
               <h2 className="text-xl font-extrabold mb-1">عروض حصرية لهذا الأسبوع!</h2>
               <p className="text-sm">خصومات تصل إلى 50% على الإلكترونيات والمزيد.</p>
-              <button className="btn-primary mt-3 text-sm">
+              <a href="all-categories.html" className="btn-primary mt-3 text-sm"> {/* تم تغيير الزر ليصبح رابطًا */}
                 تسوق الآن
-              </button>
+              </a>
             </section>
 
             {/* Categories Section */}
@@ -861,4 +767,3 @@
   </script>
 </body>
 </html>
-
